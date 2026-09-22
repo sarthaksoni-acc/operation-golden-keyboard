@@ -1,0 +1,459 @@
+{
+  "info": {
+    "_postman_id": "921bd432-11e4-4088-857a-9dfe59dbe4d6",
+    "name": "Operation Golden Keyboard",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58446315",
+    "_collection_link": "https://go.postman.co/collection/58446315-921bd432-11e4-4088-857a-9dfe59dbe4d6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "No Auth",
+      "item": [
+        {
+          "name": "Create Mission (No Auth)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codename\": \"Binary Search & Destroy\",\r\n  \"brief\": \"Find target in logarithmic time.\",\r\n  \"points\": 100,\r\n  \"difficulty\": \"warmup\",\r\n  \"status\": \"unclaimed\",\r\n  \"hostel\": \"Krishna Bhawan\",\r\n  \"solver_handle\": null,\r\n  \"deadline\": \"2026-10-30T18:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/no-auth/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "no-auth",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Basic Auth",
+      "item": [
+        {
+          "name": "Basic Auth Pass",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/basic/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "basic",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Basic Auth Fail",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "wrong_password_123",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/basic/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "basic",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Session Auth",
+      "item": [
+        {
+          "name": "Session Auth Fail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/session/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "session",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Token Auth",
+      "item": [
+        {
+          "name": "Obtain Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/token-auth/login/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "token-auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Token Auth Pass",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/token/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "token",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Token Auth Fail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/token/missions/?Authorization=Token fake_token_abc123",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "token",
+                "missions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Authorization",
+                  "value": "Token fake_token_abc123"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "JWT Auth",
+      "item": [
+        {
+          "name": "JWT Login (Auto-saving Tokens)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var response = pm.response.json();\r\nif (response.access) {\r\n    pm.environment.set(\"access_token\", response.access);\r\n    pm.environment.set(\"refresh_token\", response.refresh);\r\n}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/jwt/login/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "jwt",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "JWT Pass",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/jwt/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "jwt",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "JWT Fail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_jwt_token"
+              }
+            ],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/jwt/missions/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "jwt",
+                "missions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh JWT Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"refresh\": \"{{refresh_token}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/jwt/refresh/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "jwt",
+                "refresh",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CRUD Operations",
+      "item": [
+        {
+          "name": "Single Mission Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/no-auth/missions/1/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "no-auth",
+                "missions",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Mission (Full Update)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codename\": \"Binary Search & Destroy\",\r\n  \"brief\": \"Target acquired and cracked successfully.\",\r\n  \"points\": 100,\r\n  \"difficulty\": \"warmup\",\r\n  \"status\": \"cracked\",\r\n  \"hostel\": \"Krishna Bhawan\",\r\n  \"solver_handle\": \"crypto_hacker\",\r\n  \"deadline\": \"2026-10-30T18:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/no-auth/missions/1/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "no-auth",
+                "missions",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Mission",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://{{base_url}}/api/v1/no-auth/missions/1/",
+              "protocol": "http",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "no-auth",
+                "missions",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
